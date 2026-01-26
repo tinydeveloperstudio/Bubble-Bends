@@ -5,7 +5,7 @@ using UnityEngine;
 
 /**
  * Author: Rebekah Bledsoe
- * Version: 01/22/2026
+ * Version: 01/26/2026
  * Summary: The function of this script is to control the player
  *          and the various systems that surround them. This includes
  *          oxygen depletion/restoration, treasure storage, coin collection,
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private int oxygenUpgradeCost = 25;
     private int speedUpgradeCost = 25;
     private int suitUpgradeCost = 75;
-    private int boatUpgradeCost = 250;
+    private int boatUpgradeCost = 150;
     private int maxOxygenAmount = 100;
     private int currentOxygenAmount = 100;
     private int goldCoins = 0;
@@ -350,8 +350,8 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Animator>().SetBool("isGold", true);
                 GetComponent<SpriteRenderer>().sprite = goldBoat;
                 hasGoldenSuit = true;
+                goldCoins = goldCoins - suitUpgradeCost;
             }
-            goldCoins = goldCoins - suitUpgradeCost;
         }
         else {
             Debug.Log("You need " + (suitUpgradeCost - goldCoins) + " more coins to upgrade.");
@@ -369,8 +369,8 @@ public class PlayerController : MonoBehaviour
             if (hasGoldenSuit == true) {
                 gameObject.GetComponent<MenuController>().NewScene("Win Level");
                 hasGoldenBoat = true;
+                goldCoins = goldCoins - boatUpgradeCost;
             }
-            goldCoins = goldCoins - boatUpgradeCost;
         }
         else {
             Debug.Log("You need " + (boatUpgradeCost - goldCoins) + " more coins to upgrade.");
